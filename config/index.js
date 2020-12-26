@@ -1,9 +1,12 @@
-module.exports={
-  db:{
-    database:'demo',
-    username:'root',
-    password:'password',
-    host:'localhost',
-    dialect:'mysql', /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
-  }
+const config = {
+    db: {
+        database: process.env.DB_DATABASE,
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        dialect: 'mysql', /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+    },
 };
+
+module.exports = config;

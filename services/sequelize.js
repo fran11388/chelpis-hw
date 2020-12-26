@@ -4,11 +4,13 @@ const {
     username,
     password,
     host,
+    port,
     dialect
 } = require('../config').db;
 
 const sequelize = new Sequelize(database, username, password, {
     host: host,
+    port: port,
     dialect: dialect
 });
 
