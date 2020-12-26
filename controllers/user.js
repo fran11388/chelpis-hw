@@ -6,6 +6,8 @@ const {ROLE, ROLE_DISPLAY} = require('../constant/index');
 exports.register = async (req, res) => {
   let {name, password, email, role} = req.body;
   role = ROLE[role];
+  if (role == null) return res.status(400).json({message: '角色錯誤'});
+
   let data = {
     name,
     password,
