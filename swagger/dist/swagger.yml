@@ -1,0 +1,189 @@
+openapi: 3.0.1
+info:
+  title: chelpis-hw
+  description: this is chelpis-hw api document
+  version: 0.1-oas3
+servers:
+  - url: 'http://localhost:3000/v1/'
+paths:
+  /users/register:
+    post:
+      description: 註冊user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                role:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+            examples:
+              '0':
+                value: "{\r\n    \"name\": \"frank4\",\r\n    \"password\": \"pass\",\r\n    \"email\": \"fran113884@gmail.com\",\r\n    \"role\": \"TEACHER\"\r\n}"
+      responses:
+        '200':
+          description: 註冊成功
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+        '400':
+          description: 帳號已註冊
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+
+  /users:
+    get:
+      description: 取得老師或學生清單
+      parameters:
+        - name: role
+          in: query
+          schema:
+            type: string
+          example: STUDENT||TEACHER
+        - name: offset
+          in: query
+          schema:
+            type: string
+          example: '0'
+        - name: limit
+          in: query
+          schema:
+            type: string
+          example: '10'
+      responses:
+        '401':
+          description: 未登入
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+        '403':
+          description: 學生不可查看學生資料
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+
+  /users/me:
+    get:
+      description: 查看自己資料
+      responses:
+        '401':
+          description: 未登入
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+
+  /users/logout:
+    post:
+      description: 登出
+
+      responses:
+        '200':
+          description: 登出成功
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /users/userId:
+    get:
+      description: 查看user
+      responses:
+        '401':
+          description: 未登入
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+        '403':
+          description: 學生不可查看學生資料
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+
+  /users/login:
+    post:
+      description: 登入
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                email:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "email":"fran113884@gmail.com",
+                      "password":"pass"
+
+                  }
+      responses:
+        '200':
+          description: 登入成功
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+
+  /users/userId/score:
+    patch:
+      description: 為user評分
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score:
+                  type: integer
+            examples:
+              '0':
+                value: "{\r\n    \"score\": 12\r\n  \r\n}"
+      responses:
+        '401':
+          description: 未登入
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+        '403':
+          description: 學生不可查看學生資料
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
