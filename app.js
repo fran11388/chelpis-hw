@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var cors = require('cors');
-
+const {session:sessionConfig}=require('./config/index');
 
 var indexRouter = require('./routes/index');
 
@@ -13,7 +13,7 @@ var app = express();
 app.use(cors());
 
 app.use(session({
-  secret: 'keyboard cat',
+  secret: sessionConfig.secret,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }

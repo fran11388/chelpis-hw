@@ -7,6 +7,9 @@ const config = {
         port: process.env.DB_PORT,
         dialect: 'mysql', /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
     },
+    session:{
+        secret:process.env.SESSION_SECRET,
+    }
 };
 
 module.exports = config;
